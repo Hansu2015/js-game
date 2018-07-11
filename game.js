@@ -82,7 +82,7 @@ items.set('Вторая монета', new Actor(new Vector(15, 5)));
 function position(item) {
   return ['left', 'top', 'right', 'bottom']
     .map(side => `${side}: ${item[side]}`)
-    .join(', ');  
+    .join(', ');
 }
 
 function movePlayer(x, y) {
@@ -402,9 +402,52 @@ class Player extends Actor {
 
 
 
-const grid = [
-  new Array(3),
-  ['wall', 'wall', 'lava']
-];
-const level = new Level(grid);
-runLevel(level, DOMDisplay);
+
+
+
+const actorDict = {
+  '@': Player,
+  'o': Coin,
+  'v': FireRain,
+  '|': VerticalFireball,
+  '=': HorizontalFireball
+
+}
+
+
+const actorDict = {
+  '@': Player,
+  'v': FireRain
+}
+const parser = new LevelParser(actorDict);
+runGame(schemas, parser, DOMDisplay)
+  .then(() => console.log('Вы выиграли приз!'));
+
+/*
+const parser = new LevelParser(actorDict);
+
+
+const level = parser.parse(schema);
+runLevel(level, DOMDisplay)
+  .then(status => console.log(`Игрок ${status}`));
+
+
+  loadLevels().then(json =>
+          runGame(JSON.parse(json), parser, DOMDisplay))
+      .then(() => alert('Вы выиграли приз!'));
+*/
+/*
+const actorDict = {
+    '@': Player,
+    'v': FireRain,
+    'o': Coin,
+    '=': HorizontalFireball,
+    '|': VerticalFireball
+}
+const parser = new LevelParser(actorDict);
+
+loadLevels().then(json =>
+        runGame(JSON.parse(json), parser, DOMDisplay))
+    .then(() => alert('Вы выиграли приз!'));
+*/
+
