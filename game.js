@@ -415,17 +415,20 @@ const actorDict = {
 }
 
 
-const actorDict = {
-  '@': Player,
-  'v': FireRain
-}
 const parser = new LevelParser(actorDict);
-runGame(schemas, parser, DOMDisplay)
-  .then(() => console.log('Вы выиграли приз!'));
+
+loadLevels().then(json =>
+        runGame(JSON.parse(json), parser, DOMDisplay))
+    .then(() => alert('Вы выиграли приз!'));
+
+
+
 
 /*
 const parser = new LevelParser(actorDict);
 
+runGame(schemas, parser, DOMDisplay)
+  .then(() => console.log('Вы выиграли приз!'));
 
 const level = parser.parse(schema);
 runLevel(level, DOMDisplay)
@@ -446,8 +449,6 @@ const actorDict = {
 }
 const parser = new LevelParser(actorDict);
 
-loadLevels().then(json =>
-        runGame(JSON.parse(json), parser, DOMDisplay))
-    .then(() => alert('Вы выиграли приз!'));
+
 */
 
